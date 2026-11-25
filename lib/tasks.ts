@@ -17,8 +17,9 @@ const NEXT: Record<Status, Status[]> = { todo: ["doing"], doing: ["todo", "done"
 export function createTask(db: DatabaseSync, input: { title: string; assignee?: string; estimateHours?: number }): Task {
   const title = input.title?.trim() ?? "";
   if (title.length < 1 || title.length > 120) throw new RuleViolation("title must be 1..120 characters");
-  if (input.estimateHours !== undefined && (input.estimateHours < 1 || input.estimateHours > 40)) {
-    throw new RuleViolation("estimateHours must be 1..40");
+  if (input.estimateHours !== undefined &&
+      (!Number.isInteger(input.estimateHours) || input.estimateHours < 1 || input.estimateHours > 40)) {
+    throw new RuleViolation("estimateHours must be a whole number 1..40");
   }
   const result = db
     .prepare("insert into tasks (title, assignee, estimate_hours) values (?, ?, ?)")

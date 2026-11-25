@@ -1,0 +1,29 @@
+# HW 1.2: copy to .github/workflows/trace-gate.yml in your PR. Runs docs/ai/ci/trace-gate.mjs on every PR.
+# Rules: docs/ai/ci/README.md. Source: koldovsky/2026-spd-shop-harness v1.6.0.
+name: trace gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+jobs:
+  trace:
+    name: trace gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Key in the PR title, Refs on every commit, evidence for the head
+        env: # PR text goes through env, never into the script source
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          KEY_PATTERN: 'TASK-[0-9]+'
+          EVIDENCE_DIR: docs/evidence/
+        run: node docs/ai/ci/trace-gate.mjs
