@@ -32,7 +32,7 @@ function canonical(path) {
 function checkDiff(root, base) {
   // No rename detection: renaming old history must be reported as a deletion.
   const changed = git(root, 'diff', '--no-ext-diff', '--no-renames', '--name-only',
-    '--diff-filter=DMRTUXB', '-z', base, '--').split('\0').filter(isMigration);
+    '--diff-filter=DMRTUXB', '-z', ...(base ? [base] : []), '--').split('\0').filter(isMigration);
   if (changed.length) block(`tracked migration history changed: ${changed.join(', ')}. Stop and ask the human to review/recover it; do not commit or silently revert user work.`);
 }
 
@@ -47,6 +47,7 @@ try {
   const root = process.env.CLAUDE_PROJECT_DIR || process.cwd();
   if (['PostToolUse', 'PostToolUseFailure'].includes(payload.hook_event_name)) {
     checkDiff(root, 'HEAD');
+    checkDiff(root); // Also catch unstaged rewrites of newly staged migrations.
     process.exit(0);
   }
   if (!['Edit', 'Write', 'MultiEdit'].includes(payload?.tool_name)) process.exit(0);

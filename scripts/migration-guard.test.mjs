@@ -139,3 +139,13 @@ test('CI detects committed content changes and rejects an invalid base', t => {
     assert.equal(result.status, 2);
   }
 });
+
+test('post-tool check detects edits to a newly staged migration', t => {
+  const root = fixture(t);
+  writeFileSync(join(root, 'db/migrations/003_staged.sql'), 'select 3;');
+  git(root, 'add', 'db/migrations/003_staged.sql');
+  writeFileSync(join(root, 'db/migrations/003_staged.sql'), 'select 4;');
+  const result = run(root, { hook_event_name: 'PostToolUse', tool_name: 'Bash' });
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /003_staged.sql/);
+});

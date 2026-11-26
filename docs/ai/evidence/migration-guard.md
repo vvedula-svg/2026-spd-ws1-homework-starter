@@ -20,4 +20,4 @@ No migration was edited; the hook only inspects paths. Automated positive and ne
 
 ## After review
 
-The output above describes the original 2026-11-25 implementation. The 2026-11-26 corrections protect tracked files, allow untracked drafts, normalize case, and add post-tool/CI Git diff checks. See [current verification](review/verification.md) for the tested code SHA and 20 regression tests.
+The output above describes the original 2026-11-25 implementation. The 2026-11-26 corrections protect tracked files, allow untracked drafts, normalize case, and add post-tool/CI Git diff checks. See [current verification](review/final-verification.md) for the tested code SHA and 21 regression tests.
