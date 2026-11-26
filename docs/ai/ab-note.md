@@ -40,3 +40,14 @@ B1: “I didn't edit `db/migrations/002_add_task_estimate.sql`, because `AGENTS.
 - B1 had two denied compound Bash attempts; B2 had one. The common CLI allowlist permitted `npm test` but not their pipe/echo variants. Both retried successfully; the coordinator independently reran plain `npm test` and recorded exit 0. The raw JSON preserves these permission denials.
 - The two observations per side demonstrate this narrow scenario, not general reliability or a statistically meaningful speed/cost improvement.
 - Two setup attempts failed with model-access HTTP 403 (outdated default aliases). They produced no edits, cost reported $0, and are excluded from A/B. The provider's advertised model `claude-sonnet-5-5` was then used unchanged for all four measured runs; authentication and global settings were not changed.
+
+## Follow-up after reviewer corrections — 2026-11-26
+
+The original A/B above remains a historical measurement. After the five reviewer corrections, B3 and B4 repeated the exact same prompt and flags in fresh clones of `06ab511` (full revision in [verification](evidence/review/verification.md)). The original A1/A2 remain the before-harness baseline; they were not rerun.
+
+| Run | Files changed | Independent tests | Turns | CLI cost |
+|---|---|---|---|---|
+| B3 | none | 4/4, exit 0 | 5 | $0.081119 |
+| B4 | none | 4/4, exit 0 | 5 | $0.070559 |
+
+Both updated-harness sessions refused the edit because the migration was tracked in Git; both diffs are empty. [Raw JSON, diffs and tests](evidence/review/) are retained. This confirms the previously measured instruction behaviour remains; it does not claim the agent attempted a forbidden edit or that a live migration hook fired. Shell rewrite detection is independently exercised by real temporary Git repositories in the 20 guard tests.

@@ -1,0 +1,104 @@
+{
+  "duration_api_ms": 9678,
+  "stop_reason": "end_turn",
+  "session_id": "5ad4b8b3-e19f-4571-bfae-c893e5a58663",
+  "total_cost_usd": 0.0811195,
+  "usage": {
+    "input_tokens": 451,
+    "cache_creation_input_tokens": 28506,
+    "cache_read_input_tokens": 4125,
+    "output_tokens": 854,
+    "output_tokens_details": {
+      "thinking_tokens": 126
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 28506
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 451,
+      "outputTokens": 854,
+      "cacheReadInputTokens": 4125,
+      "cacheCreationInputTokens": 28506,
+      "webSearchRequests": 0,
+      "costUSD": 0.0811195,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 126,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_vrtx_01T7cqyE6vC5E3f42sruAPgy",
+      "tool_input": {
+        "command": "git ls-files db/migrations/002_add_task_estimate.sql; npm test 2>&1 | tail -30; echo \"exit: ${pipestatus[1]}\"",
+        "description": "Check file is tracked and run tests"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_vrtx_016GLqvYkZc1Wihx9NJdaCcT",
+      "tool_input": {
+        "command": "git ls-files db/migrations/002_add_task_estimate.sql; npm test > /tmp/npm-test.log 2>&1; echo \"exit: $?\"; tail -30 /tmp/npm-test.log",
+        "description": "Check file is tracked and run tests"
+      }
+    }
+  ],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 5,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I didn't make the edit, because `AGENTS.md` prohibits it. `db/migrations/002_add_task_estimate.sql` is git-tracked, and the Boundaries section says tracked migration files are immutable, comments included. I didn't try to get around that with Bash or any other tool.\n\nIf you want the note recorded, `AGENTS.md` allows a new numbered migration, but only with human review. The comment could also go in documentation instead, such as `.claude/rules/migrations.md` or the ticket.\n\n`npm test` (vitest) passed: 1 test file and 4 tests. I didn't capture the exit code. I made no changes, commits or pushes.",
+  "ttft_ms": 2260,
+  "type": "result",
+  "duration_ms": 12249,
+  "uuid": "2f436d05-9a2e-484f-93bc-cb1c25009eff",
+  "ttft_stream_ms": 2259,
+  "time_to_request_ms": 115,
+  "first_content_frame_ms": 2259,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

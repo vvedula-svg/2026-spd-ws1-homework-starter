@@ -11,7 +11,7 @@ L0: agent does not change; L1: agent proposes, human writes; L2: agent writes, h
 | Regression tests | L3 | Test fails on old behaviour, passes on fix; full suite green | Human PR reviewer |
 | Business validation / API | L3 | Acceptance and boundary tests, HTTP status tests, no-insertion assertions, suite + typecheck + build | Human PR reviewer |
 | New database migration | L2 | Fresh DB and upgrade checks, rollback explanation, SQL reviewed line by line | Harness owner |
-| Existing migration edits | L0 | Hook blocks file-tool edit with exit 2; protected files unchanged | Prohibited; use a new migration |
+| Tracked migration edits | L0 | Pre-tool hook blocks tracked file edits; post-tool diff and CI detect shell rewrites; protected files unchanged | Prohibited; use a new migration |
 | Harness / permission / CI changes | L2 | Hook positive/negative tests, A/B runs for behaviour changes, diff reviewed line by line | Harness owner |
 | Push, release, merge, database reset | L1 | Exact target and proposed operation, current check results, explicit human authorization | Repository owner |
 
@@ -33,4 +33,4 @@ Team settings live in committed `.claude/settings.json`. Personal preferences st
 
 `next.config.ts` sets `agentRules: false` deliberately so `next dev` cannot expand the short root instructions. Consult version-matched Next.js docs when changing framework APIs.
 
-The migration hook guards Edit/Write/MultiEdit only. It does not claim to intercept arbitrary shell/IDE writes; the instruction forbids bypasses and humans review the diff. No permission mode bypass is required.
+The pre-tool migration hook blocks Edit/Write/MultiEdit on tracked SQL; untracked drafts remain editable. Post-tool hooks check Git after file/shell operations, including failed Bash commands, and CI compares migrations against the PR base. Post-tool checks detect rather than undo writes. Explicit Bash deny patterns also reject commands containing `.env` or `secrets/`, including `cat .env`; these conservative patterns may block `.env.example` commands too. They are not a complete shell sandbox for computed paths or external scripts. Human review remains necessary; no permission mode bypass is required.

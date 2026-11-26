@@ -1,0 +1,21 @@
+# owner: @vvedula-svg · why: reject migration rewrites even when shell commands bypass file hooks · review-by: 2027-03-25
+name: migration guard
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  migration-history:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test scripts/migration-guard.test.mjs
+      - name: Reject changes to existing migrations
+        env:
+          MIGRATION_BASE: ${{ github.event.pull_request.base.sha }}
+        run: node .claude/hooks/protect-migrations.mjs --base "$MIGRATION_BASE"

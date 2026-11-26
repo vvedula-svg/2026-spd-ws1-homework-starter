@@ -9,7 +9,7 @@
 
 ## Boundaries
 - Read the ticket and acceptance criteria before editing; keep changes scoped.
-- Existing `db/migrations/*.sql` files are immutable, including comments. Add a new numbered migration only with human review.
+- Git-tracked `db/migrations/*.sql` files are immutable, including comments. Add a new numbered migration only with human review.
 - Never bypass a blocked hook with Bash, another tool, or changes to the harness.
 - Do not read secrets, reset the database, push, publish, or merge without explicit authorization.
 - Preserve title and status rules unless the ticket explicitly changes them.
@@ -22,4 +22,3 @@
 - Database changes: `.claude/rules/migrations.md`.
 - Verification procedure: `.claude/skills/verify-change/SKILL.md`.
 - Session handoff: `docs/ai/handoff-template.md`.
-- Homework requirements: `HOMEWORK.md` and `HOMEWORK-1.2.md`.

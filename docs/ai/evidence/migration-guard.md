@@ -17,3 +17,7 @@ Stdout: empty.
 Exit code: 2
 
 No migration was edited; the hook only inspects paths. Automated positive and negative checks: `node --test scripts/migration-guard.test.mjs` (6 passed).
+
+## After review
+
+The output above describes the original 2026-11-25 implementation. The 2026-11-26 corrections protect tracked files, allow untracked drafts, normalize case, and add post-tool/CI Git diff checks. See [current verification](review/verification.md) for the tested code SHA and 20 regression tests.

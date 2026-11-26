@@ -1,0 +1,238 @@
+✔ Edit blocks an existing migration with a reason (346.303375ms)
+✔ Write blocks an existing migration with a reason (322.490667ms)
+✔ MultiEdit blocks an existing migration with a reason (325.224666ms)
+✔ normalizes absolute, traversal, Windows separator and symlink paths (983.517542ms)
+✔ allows a new migration, unrelated edit and reading an old migration (776.823625ms)
+✔ fails closed on malformed JSON and missing write path (738.45325ms)
+✖ blocks upper-case SQL aliases and recreating a deleted tracked migration (404.209458ms)
+✖ allows editing an untracked draft, then protects it once tracked (351.20825ms)
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql (506.691125ms)
+✖ post-tool check detects shell change: sed 's/1/2/' db/migrations/001_existing.sql > changed.sql && mv changed.sql db/migrations/001_existing.sql (356.618334ms)
+✖ post-tool check detects shell change: cd db/migrations && printf changed | tee 001_existing.sql >/dev/null (390.429125ms)
+✖ post-tool check detects shell change: rm db/migrations/001_existing.sql (317.907417ms)
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql && git add db/migrations (325.133209ms)
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql; exit 1 (309.896583ms)
+✔ post-tool check allows new migrations and unrelated changes (319.445667ms)
+✖ CI detects committed modification and rename against the base (441.487166ms)
+✖ CI accepts a committed new migration (393.795417ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 7
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7866.223875
+
+✖ failing tests:
+
+test at scripts/migration-guard.test.mjs:65:1
+✖ blocks upper-case SQL aliases and recreating a deleted tracked migration (404.209458ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:67:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:72:1
+✖ allows editing an untracked draft, then protects it once tracked (351.20825ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 0
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:76:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql (506.691125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: sed 's/1/2/' db/migrations/001_existing.sql > changed.sql && mv changed.sql db/migrations/001_existing.sql (356.618334ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: cd db/migrations && printf changed | tee 001_existing.sql >/dev/null (390.429125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: rm db/migrations/001_existing.sql (317.907417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql && git add db/migrations (325.133209ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:89:3
+✖ post-tool check detects shell change: echo changed > db/migrations/001_existing.sql; exit 1 (309.896583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:94:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:107:1
+✖ CI detects committed modification and rename against the base (441.487166ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /001_existing.sql/. Input:
+  
+  'Blocked: migration guard could not validate its input; fix the payload before retrying.\n'
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:115:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Blocked: migration guard could not validate its input; fix the payload before retrying.\n',
+    expected: /001_existing.sql/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at scripts/migration-guard.test.mjs:118:1
+✖ CI accepts a committed new migration (393.795417ms)
+  AssertionError [ERR_ASSERTION]: Blocked: migration guard could not validate its input; fix the payload before retrying.
+  
+  
+  2 !== 0
+  
+      at TestContext.<anonymous> (file://<checkout>/scripts/migration-guard.test.mjs:125:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

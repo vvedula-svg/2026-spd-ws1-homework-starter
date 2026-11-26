@@ -1,0 +1,15 @@
+
+> ws1-homework-starter@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.0 /private<checkout>
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  11:22:44
+   Duration  333ms (import 37%, tests 31%, transform 21%, worker 11%)
+
+
+Exit code: 0
